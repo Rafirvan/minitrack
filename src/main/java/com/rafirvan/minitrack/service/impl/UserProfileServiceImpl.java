@@ -36,7 +36,7 @@ public class UserProfileServiceImpl implements UserProfileService {
                 .executeUpdate();
 
         if (updatedCount == 0) {
-            throw new RuntimeException("User profile not found for user account ID: " + userAccountId);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "user profile not found");
         }
         } catch (IllegalArgumentException e) {
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid gender value. Allowed values are 'MALE' or 'FEMALE'.", e);

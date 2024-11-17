@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TaxTypeRequest {
     @NotBlank(message = "Tax type name is required")
     private String name;

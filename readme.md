@@ -15,6 +15,7 @@
 - **Feature 2**: Review and check tax payments
 - **Feature 3**: User Register, login and profile system
 - **Feature 4**: save and edit tax types (for Admin role)
+- 
 
 - 
 
@@ -44,7 +45,7 @@ To get started with this project, ensure the following tools are installed on yo
 - **Framework**: Spring Boot
 - **Database**: PostgreSQL
 - **Build Tool**: Maven
-- **Testing**: JUnit, Mockito
+- **Testing** (only some services are currently tested) : JUnit, Mockito
 - **Containerization**: Docker (compose)
 
 ---
@@ -71,6 +72,10 @@ To get started with this project, ensure the following tools are installed on yo
    docker build -t project-name .
    docker run -p 8080:8080 project-name
    ```
+
+docker image can be checked here:
+   
+https://hub.docker.com/repository/docker/zxcee/minitrack-app/general   
 
 ---
 
@@ -132,8 +137,6 @@ Here’s a list of key API endpoints:
 
 
 ### Swagger
-
-
 or optionally, use Swagger at 
    ```
    http://localhost:8080/swagger-ui/index.html

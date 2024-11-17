@@ -50,7 +50,7 @@ public class TaxTypeServiceImpl implements TaxTypeService {
                 .executeUpdate();
 
         if (updated == 0) {
-            throw new RuntimeException("Tax type not found for ID: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Tax type not found");
         }
 
         Object[] result = (Object[]) entityManager.createNativeQuery(

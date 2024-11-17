@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -81,15 +82,12 @@ public class UserAccountServiceImpl implements UserAccountService, UserDetailsSe
     @Override
     public void loginUser(LoginRequest loginRequest) {
         try {
-            // Load the user details directly using loadUserByUsername
             UserDetails userDetails = loadUserByUsername(loginRequest.getUsername());
 
-            // Check password manually
             if (!passwordEncoder.matches(loginRequest.getPassword(), userDetails.getPassword())) {
                 throw new BadCredentialsException("Invalid password");
             }
 
-            // Create the authentication token
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
                             userDetails,
@@ -116,7 +114,7 @@ public class UserAccountServiceImpl implements UserAccountService, UserDetailsSe
                     .setParameter(1, username)
                     .getSingleResult();
 
-            return org.springframework.security.core.userdetails.User.builder()
+            return User.builder()
                     .username((String) result[1])
                     .password((String) result[2])
                     .roles(((String) result[3]).replace("ROLE_", ""))

@@ -7,7 +7,9 @@ import com.rafirvan.minitrack.service.PaymentRecordService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDateTime;
 
@@ -27,7 +29,7 @@ public class PaymentRecordServiceImpl implements PaymentRecordService {
                 .getSingleResult();
 
         if (paymentRecord.getPaymentStatus() != PaymentStatus.UNPAID) {
-            throw new IllegalStateException("Payment record is not in UNPAID status.");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Payment record is not in UNPAID status.");
         }
 
         paymentRecord.setPaymentStatus(PaymentStatus.PAID);
